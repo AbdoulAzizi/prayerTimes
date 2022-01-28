@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        margin: 0;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #1c2729;
+    }
+    
+    td {
+        padding: 15px;
+        text-align: center;
+        color: #d7d4f1;
+        border: solid 4px #d7d4f1;
+    }
+    
+    .arabic_text {
+        font-family: Tajawal;
+    }
+    
+    .bottom_label {
+        font-size: 30px;
+    }
+    
+    .small_text_one {
+        font-size: 15px;
+        text-align: center;
+    }
+    
+    .time_now span {
+        font-size: 180px;
+    }
+    
+    .date,
+    .prayer_time_now_right_label {
+        font-size: 25px;
+        text-align: right;
+    }
+    
+    .time_now_right {
+        font-size: 50px;
+    }
+    
+    .prayer_time_now_right {
+        font-size: 75px;
+    }
+    
+    .prayer_time_now tr td {
+        border: none;
+        padding: 0;
+    }
+    
+    .bottom_label_time_active {
+        background-color: #4B686E;
+    }
+    
+    .prayer_time_now_right,
+    .time_now span {
+        letter-spacing: 15px;
+        font-weight: bold;
+        font-family: Tajawal;
+    }
+    
+    .prayer_time_now tr {
+        background: #4B686E;
+        border: solid 1px #1c2729;
+    }
+    
+    .prayer_time_now tr td {
+        color: #fff;
+    }
+    
+    .link {
+        float: right;
+    }
+    
+    .time_now_text {
+        font-size: 75px;
+    }
+    
+    .flip-card {
+        perspective: 1000px;
+    }
+    
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+    
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+    
+    .flip-card-front,
+    .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: -190px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+    .flip-card-back {
+        background-color: #4B686E;
+        transform: rotateY(180deg);
+    }
+    
+    td.flip-card-outer:hover {
+        background: #4B686E;
+    }
+    
+    td.flip-card-outer {
+        height: 400px;
+    }
+</style>
+
+<body>
+
+    <table class="prayer_time">
+
+
+        <tr>
+            <td class="flip-card-outer" colspan="4">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="arabic_text">مسجد ذو النورين</span> Mosquee Dhoun Nourain<br>
+                            <div class="time_now"><span>12:52</span>PM</div><br>
+                            <span class="date">19 janvier <span class="arabic_text">(يناير)</span>, 2022</span><br>
+                            <span class="date">16 Jumaada II <span class="arabic_text">(جمادى الثانية)</span>, 1443</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="arabic_text">مسجد ذو النورين</span> Mosquee Dhoun Nourain<br>
+                            <div class="time_now_text"><span>iqama temps de prière zuhr</div><br>
+					<span class="date">19 janvier <span class="arabic_text">(يناير)</span>, 2022</span><br>
+                                <span class="date">16 Jumaada II <span class="arabic_text">(جمادى الثانية)</span>, 1443</span>
+                            </div>
+                        </div>
+                    </div>
+            </td>
+
+            <td class="flip-card-outer" colspan="4">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="arabic_text">Copyright &#169; 2022 Mosque prayer Times All rights reserved<br><br>
+					<span class="time_now_right">Asr <span class="arabic_text">(العصر)</span></span><br>
+                            <table class="prayer_time_now">
+                                <tr>
+                                    <td class="prayer_time_now_right_label">Azan <span class="arabic_text">(الأذان): </span></td>
+                                    <td class="prayer_time_now_right">2:23</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="prayer_time_now_right_label">Iqama <span class="arabic_text">(الإقامة): </span></td>
+                                    <td class="prayer_time_now_right">3:00</td>
+                                </tr>
+
+                            </table>
+                            <span class="link">www.salafidemontreal.com</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="arabic_text">Copyright &#169; 2022 Mosque prayer Times All rights reserved<br><br>
+					<span class="time_now_right">Asr <span class="arabic_text">(العصر)</span></span><br>
+                            <div class="time_now_text"><span>وقت إقامة الصلاة الظهر</div><br>
+					<span class="link">www.salafidemontreal.com</span>
+                            </div>
+                        </div>
+                    </div>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td></td>
+            <td class="bottom_label">Fajr <span class="arabic_text">(الفجر)</span></td>
+            <td class="bottom_label">Shurooq <span class="arabic_text">(الشروق)</span></td>
+            <td class="bottom_label">Zuhr <span class="arabic_text">(الظهر)</span></td>
+            <td class="bottom_label">Asr <span class="arabic_text">(العصر)</span></td>
+            <td class="bottom_label">Maghreb <span class="arabic_text">(المغرب)</span></td>
+            <td class="bottom_label">Isha <span class="arabic_text">(العشاء)</span></td>
+            <td class="bottom_label">Jum'ah <span class="arabic_text">(الجمعة)</span></td>
+        </tr>
+        <tr>
+            <td class="bottom_label bottom_label_time">Azan <span class="arabic_text">(الأذان)</span></td>
+            <td class="bottom_label bottom_label_time">6:01</td>
+            <td class="bottom_label bottom_label_time" rowspan="2">7:28</td>
+            <td class="bottom_label bottom_label_time bottom_label_time_active">12:05</td>
+            <td class="bottom_label bottom_label_time">2:23</td>
+            <td class="bottom_label bottom_label_time">4:43</td>
+            <td class="bottom_label bottom_label_time">6:10</td>
+            <td class="bottom_label bottom_label_time" rowspan="2">
+                <span class="small_text_one">Khutbah <span class="arabic_text">(الخطبة)</span></span><br> 1:00
+            </td>
+        </tr>
+        <tr>
+            <td class="bottom_label bottom_label_time">Iqama <span class="arabic_text">(الإقامة)</span></td>
+            <td class="bottom_label bottom_label_time">6:20</td>
+            <td class="bottom_label bottom_label_time bottom_label_time_active">12:30</td>
+            <td class="bottom_label bottom_label_time">3:00</td>
+            <td class="bottom_label bottom_label_time">4:55</td>
+            <td class="bottom_label bottom_label_time">7:00</td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
