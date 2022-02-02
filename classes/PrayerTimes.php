@@ -11,7 +11,6 @@ class PrayerTimes {
 
     public function __construct() {
 
-
         $this->azan_name =  ['en' => 'Azan','ar' => 'الأذان'];
         $this->iqamah_name = ['en' => 'Iqamah','ar' => 'الإقامة'];
         $this->masjid_name = ['en' => 'Mosquee Dhoun Nourain','ar' => 'مسجد ذو النورين'];
@@ -33,6 +32,8 @@ class PrayerTimes {
         $this->current_hijr_date = $this->get_hijr_date($this->current_time);
         $this->today_prayer_times = $this->get_today_prayer_times();
         $this->next_prayer = $this->get_next_prayer_time();
+        $this->current_prayer = $this->get_current_prayer_time();
+        var_dump($this->current_prayer);
 
         // this site link
         $this->site_link = 'www.salafidemontreal.com';
@@ -119,6 +120,43 @@ class PrayerTimes {
       $prayer_time = $this->today_prayer_times[$prayer_name];
 
       return $prayer_time;
+    }
+
+    // get current prayer time based on current time
+    public function get_current_prayer_time(){
+  
+      $fajr_time = $this->get_prayer_time('fajr');
+      $zuhr_time = $this->get_prayer_time('zuhr');
+      $asr_time = $this->get_prayer_time('asr');
+      $maghrib_time = $this->get_prayer_time('maghrib');
+      $isha_time = $this->get_prayer_time('isha');
+
+      $current_prayer_time = '';
+      $current_prayer_name = '';
+      $now = date('H:i', $this->current_time);
+
+      if( $now < $fajr_time){
+        $current_prayer_time = $fajr_time;
+        $current_prayer_name = $this->get_prayer_name('fajr');
+      }else if ($now >= $fajr_time && $now < $zuhr_time) {
+        $current_prayer_time = $fajr_time;
+        $current_prayer_name = $this->get_prayer_name('fajr');
+      } else if ($now >= $zuhr_time && $now < $asr_time) {
+        $current_prayer_time = $zuhr_time;
+        $current_prayer_name = $this->get_prayer_name('zuhr');
+      } else if ($now >= $asr_time && $now < $maghrib_time) {
+        $current_prayer_time = $asr_time;
+        $current_prayer_name = $this->get_prayer_name('asr');
+      } else if ($now >= $maghrib_time && $now < $isha_time) {
+        $current_prayer_time = $maghrib_time;
+        $current_prayer_name = $this->get_prayer_name('maghrib');
+      } else if ($now >= $isha_time) {
+        $current_prayer_time = $isha_time;
+        $current_prayer_name = $this->get_prayer_name('isha');
+      }
+
+      return ['time' => $current_prayer_time, 'iqamah' => $this->get_iqamah_time($current_prayer_name), 'name' => $current_prayer_name];
+      
     }
 
    
@@ -217,6 +255,7 @@ class PrayerTimes {
 
      // get iqaamah time
      public function get_iqamah_time($prayer_name){
+      $prayer_name = strtolower($prayer_name);
       $iqamah_munites = $prayer_name . '_iqamah_minutes';
       $prayer_time = $this->get_today_prayer_times()[$prayer_name];
       $prayer_time = strtotime($prayer_time);
