@@ -22,21 +22,33 @@ class PrayerTimes {
         $this->current_time = time();
         
         // initialize today prayer and iqamah times
-        $this->fajr_iqamah_minutes = 15;
-        $this->zuhr_iqamah_minutes = 10;
-        $this->asr_iqamah_minutes = 10;
-        $this->maghrib_iqamah_minutes = 5;
-        $this->isha_iqamah_minutes = 15;
+        // get iqamah time from iqamah.xml file
 
+        $this->fajr_iqamah_minutes = $this->get_iqamah_minutes('fajr');
+        $this->zuhr_iqamah_minutes = $this->get_iqamah_minutes('zuhr');
+        $this->asr_iqamah_minutes = $this->get_iqamah_minutes('asr');
+        $this->maghrib_iqamah_minutes = $this->get_iqamah_minutes('maghrib');
+        $this->isha_iqamah_minutes = $this->get_iqamah_minutes('isha');
         // get current hijr date
         $this->current_hijr_date = $this->get_hijr_date($this->current_time);
         $this->today_prayer_times = $this->get_today_prayer_times();
         $this->next_prayer = $this->get_next_prayer_time();
         $this->current_prayer = $this->get_current_prayer_time();
-        var_dump($this->current_prayer);
-
         // this site link
         $this->site_link = 'www.salafidemontreal.com';
+    }
+
+    // get_iqamah_time function
+    // get iqamah time from iqamah.xml file
+    public function get_iqamah_minutes($prayer_name) {
+        $iqamah_time = 0;
+        $iqamah_xml = simplexml_load_file('./data/iqamah.xml');
+        foreach ($iqamah_xml->prayer as $prayer) {
+            if ($prayer->name == $prayer_name) {
+                $iqamah_time = $prayer->iqamah;
+            }
+        }
+        return $iqamah_time;
     }
 
     // get current hijr date

@@ -1,0 +1,25 @@
+<!-- minutes between iqamah time and prayer time for each prayer -->
+<!-- fajr, sunrise, dhuhr, asr, maghrib, isha -->
+<iqamah>
+  <prayer>
+    <name>fajr</name>
+    <iqamah>15</iqamah>
+   </prayer>
+    <prayer>
+        <name>zuhr</name>
+        <iqamah>10</iqamah>
+    </prayer>
+    <prayer>
+        <name>asr</name>
+        <iqamah>10</iqamah>
+    </prayer>
+    <prayer>
+        <name>maghrib</name>
+        <iqamah>10</iqamah>
+    </prayer>
+    <prayer>
+        <name>isha</name>
+        <iqamah>15</iqamah>
+    </prayer>
+</iqamah>
+
