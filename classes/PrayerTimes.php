@@ -11,13 +11,13 @@ class PrayerTimes {
 
     public function __construct() {
 
+      $this->_xml_params = simplexml_load_file('./data/params.xml');
         $this->azan_name =  ['en' => 'Azan','ar' => 'الأذان'];
         $this->iqamah_name = ['en' => 'Iqamah','ar' => 'الإقامة'];
-        $this->masjid_name = ['en' => 'Mosquee Dhoun Nourain','ar' => 'مسجد ذو النورين'];
+        $this->masjid_name = ['en' => $this->get_masjid_names()['en'], 'ar' => $this->get_masjid_names()['ar']];
 
         // set default timezone
-        date_default_timezone_set('America/Montreal');
-      
+        date_default_timezone_set($this->_xml_params->timezone);      
         // get current time
         $this->current_time = time();
         
@@ -34,16 +34,24 @@ class PrayerTimes {
         $this->today_prayer_times = $this->get_today_prayer_times();
         $this->next_prayer = $this->get_next_prayer_time();
         $this->current_prayer = $this->get_current_prayer_time();
-        // this site link
-        $this->site_link = 'www.salafidemontreal.com';
+        // get site link from params.xml file
+        $this->site_link = $this->get_site_link();
+
+    }
+
+    // get site link from params.xml file
+    public function get_site_link() {
+        foreach ($this->_xml_params->site_link as $link) {
+            return $link->url;
+        }
     }
 
     // get_iqamah_time function
     // get iqamah time from iqamah.xml file
     public function get_iqamah_minutes($prayer_name) {
         $iqamah_time = 0;
-        $iqamah_xml = simplexml_load_file('./data/iqamah.xml');
-        foreach ($iqamah_xml->prayer as $prayer) {
+        // $iqamah_xml = simplexml_load_file('./data/params.xml');
+        foreach ($this->_xml_params->prayer as $prayer) {
             if ($prayer->name == $prayer_name) {
                 $iqamah_time = $prayer->iqamah;
             }
@@ -51,10 +59,26 @@ class PrayerTimes {
         return $iqamah_time;
     }
 
+    // get_masjid_name function
+    // get masjid name from params.xml file
+    public function get_masjid_names() {
+        $masjid_name = [];
+        // $masjid_xml = simplexml_load_file('./data/params.xml');
+        foreach ($this->_xml_params->masjid as $masjid) {
+            $masjid_name_en = $masjid->name;
+            $masjid_name_ar = $masjid->name_ar;
+
+            $masjid_name['en'] = $masjid_name_ar;
+            $masjid_name['ar'] = $masjid_name_en;
+            
+        }
+        return $masjid_name;
+    }
+
     // get current hijr date
     public function get_hijr_date($time){
         
-      $Arabic = new I18N_Arabic_Date(); // create new instance of I18N_Arabic_Date class
+      $Arabic = new Arabic_Date(); // create new instance of Arabic_Date class
       // $Arabic->setMode(1);
       $correction = $Arabic->dateCorrection ($time);    
         
@@ -193,6 +217,7 @@ class PrayerTimes {
     
         }
       }
+
       
       $next_prayer_time = date('H:i', $next_prayer_time);
       $iqamah_time = $this->get_iqamah_time($next_prayer_name);
@@ -215,11 +240,14 @@ class PrayerTimes {
       $year = date('Y', $timestamp);
       $month = date('m', $timestamp);
       $day = date('d', $timestamp);
-      $latidude_montreal = 45.5017;
-      $longitude_montreal = -73.5673;
-      $timezone_montreal = -5;
+     
+      // get latitide, longitude and timezone from params.xml file
+      $params = $this->get_params();
+      $latitude = $params['latitude'];
+      $longitude = $params['longitude'];
+      $timezone = $params['timezone'];
 
-      $today_prayer_times = $pt->getDatePrayerTimes($year, $month, $day, $latidude_montreal, $longitude_montreal, $timezone_montreal);
+      $today_prayer_times = $pt->getDatePrayerTimes($year, $month, $day, $latitude, $longitude, $timezone);
 
 
       // changeto the today_prayer_times array keys to match the prayer_times array keys
@@ -236,6 +264,18 @@ class PrayerTimes {
 
     }
 
+    // get get_params from params.xml file
+    public function get_params(){
+     
+      foreach ($this->_xml_params->location as $location) {
+        $params = [
+          'latitude' => $location->latitude,
+          'longitude' => $location->longitude,
+          'timezone' => $location->timezone
+        ];
+      }
+      return $params;
+    }
      // get next day prayer times
      public function get_next_day_prayer_times(){
       $pt = new PrayTime();   

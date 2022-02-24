@@ -1,6 +1,6 @@
 <?php
 
-class I18N_Arabic_Date
+class Arabic_Date
 {
     private $_mode = 1;
     private $_xml  = null;

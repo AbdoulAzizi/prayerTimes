@@ -27,7 +27,8 @@ require_once 'Date.php';
                   </div>
                   <div class="flip-card-back">
                       <span class="arabic_text"><?php echo $prayertimes->get_masjid_name(); ?></span><br>
-                      <div class="time_now_text"><span>Iqama temps de prière  <?php echo ucfirst($current_prayer_name); ?></span></div>
+                      <!-- <div class="time_now_text"><span>Iqama temps de prière  <?php echo ucfirst($current_prayer_name); ?></span></div> -->
+                      <div class="time_now_text"><span>Date et l'heure actuelle</span></div>
                       <span class="date"><?php echo date('d', $prayertimes->time) . ' ' . $prayertimes->get_months(date('m', $prayertimes->time))['fr']; ?>  <span class="arabic_text"> <?php echo '('.$prayertimes->get_months(date('m', $prayertimes->time))['ar'].'), '; ?></span><?php echo date('Y', $prayertimes->time); ?></span><br>
                           <span class="date"><?php echo $prayertimes->current_hijr_date; ?></span>
                       </div>
@@ -41,16 +42,16 @@ require_once 'Date.php';
             <div class="flip-card-front">
 
                 <span class="arabic_text">Copyright &#169; 2022 Mosque prayer Times All rights reserved<br><br>
-                <span class="time_now_right"><?php echo $prayertimes->current_prayer['name'] . ' ('.$prayertimes->get_prayer_name_ar($current_prayer_name).')'; ?></span><br>
+                <span class="time_now_right"><?php echo $prayertimes->next_prayer['name'] . ' ('.$prayertimes->get_prayer_name_ar(strtolower($prayertimes->next_prayer['name'])).')'; ?></span><br>
                 <table class="prayer_time_now">
                     <tr>
                         <td class="prayer_time_now_right_label"><?php echo $prayertimes->get_azan_name(); ?></td>
-                        <td class="prayer_time_now_right"><?php echo $prayertimes->current_prayer['time']; ?></td>
+                        <td class="prayer_time_now_right"><?php echo $prayertimes->next_prayer['time']; ?></td>
                     </tr>
 
                     <tr>
                         <td class="prayer_time_now_right_label"><?php echo $prayertimes->get_iqamah_name(); ?></td>
-                        <td class="prayer_time_now_right"><?php echo $prayertimes->current_prayer['iqamah']; ?></td>
+                        <td class="prayer_time_now_right"><?php echo $prayertimes->next_prayer['iqamah']; ?></td>
                     </tr>
 
                 </table>
@@ -58,8 +59,8 @@ require_once 'Date.php';
             </div>
             <div class="flip-card-back">
                 <span class="arabic_text">Copyright &#169; 2022 Mosque prayer Times All rights reserved<br><br>
-                <span class="time_now_right"><?php echo $prayertimes->current_prayer['name'] . ' ('.$prayertimes->get_prayer_name_ar($current_prayer_name).')'; ?></span><br>
-                <div class="time_now_text"><span>وقت إقامة الصلاة <?php echo $prayertimes->get_prayer_name_ar($current_prayer_name); ?></div><br>
+                <span class="time_now_right"><?php echo $prayertimes->next_prayer['name'] . ' ('.$prayertimes->get_prayer_name_ar(strtolower($prayertimes->next_prayer['name'])).')'; ?></span><br>
+                <div class="time_now_text"><span>وقت إقامة الصلاة <?php echo $prayertimes->get_prayer_name_ar(strtolower($prayertimes->next_prayer['name'])); ?></div><br>
                       <span class="link"><?php echo $prayertimes->site_link; ?></span>
                 </div>
             </div>
@@ -102,8 +103,8 @@ require_once 'Date.php';
 
 <script>
    // add active class to current prayer
-    var current_prayer_time = '<?php echo $prayertimes->current_prayer['time']; ?>';
-    var current_prayer_iqamah = '<?php echo $prayertimes->current_prayer['iqamah']; ?>';
+    var current_prayer_time = '<?php echo $prayertimes->next_prayer['time']; ?>';
+    var current_prayer_iqamah = '<?php echo $prayertimes->next_prayer['iqamah']; ?>';
 
     // get value of each bottom_label_time class with javascript
     var bottom_label_time = document.getElementsByClassName('bottom_label_time');

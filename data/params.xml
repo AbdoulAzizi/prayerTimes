@@ -1,0 +1,59 @@
+<!-- minutes between iqamah time and prayer time for each prayer -->
+<!-- fajr, sunrise, dhuhr, asr, maghrib, isha -->
+<params>
+    <prayer>
+        <name>fajr</name>
+        <iqamah>15</iqamah>
+    </prayer>
+        <prayer>
+            <name>zuhr</name>
+            <iqamah>10</iqamah>
+        </prayer>
+        <prayer>
+            <name>asr</name>
+            <iqamah>10</iqamah>
+        </prayer>
+        <prayer>
+            <name>maghrib</name>
+            <iqamah>10</iqamah>
+        </prayer>
+        <prayer>
+            <name>isha</name>
+            <iqamah>15</iqamah>
+        </prayer>
+
+        <!-- set latitude, longitude, timezone, and dst -->
+        <!-- latitude Montreal : 45.5017 -->
+        <!-- longitude Montreal : -73.5673 -->
+        <!-- timezone Montreal : -5 -->
+        <!-- dst Montreal : 1 -->
+
+        <location>
+            <latitude>45.5017</latitude>
+            <longitude>-73.5673</longitude>
+            <timezone>-5</timezone>
+        </location>
+
+        <!-- set Mosque name in english and arabic -->
+        <!-- name in english -->
+        <!-- name in arabic -->
+
+        <masjid>
+            <name>Mosquee Dhoun Nourain</name>
+            <name_ar>مسجد ذو النورين</name_ar>
+        </masjid>
+
+        <!-- set site url -->
+
+        <site_link>
+            <url>www.salafidemontreal.com</url>
+        </site_link>
+
+        <!-- set  default timezone America/Montreal -->
+
+        <timezone>America/Montreal</timezone>
+        
+     
+</params>
+
+
