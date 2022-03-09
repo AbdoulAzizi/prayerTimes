@@ -20,6 +20,12 @@ class PrayerTimes {
         date_default_timezone_set($this->_xml_params->timezone);      
         // get current time
         $this->current_time = time();
+
+        // get current hour
+        $this->current_hour = date('H', $this->current_time);
+
+        // get current minute
+        $this->current_minute = date('i', $this->current_time);
         
         // initialize today prayer and iqamah times
         // get iqamah time from iqamah.xml file

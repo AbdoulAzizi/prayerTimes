@@ -22,6 +22,8 @@ require_once 'Date.php';
                   <div class="flip-card-front">
                       <span class="arabic_text"><?php echo $prayertimes->get_masjid_name(); ?></span><br>
                       <div class="time_now"><span><?php echo date('h:i', $prayertimes->current_time) . ' ' ?></span><?php echo date('A', $prayertimes->current_time); ?></div>
+                      <input type="hidden" id="current_hour" value="<?php echo date('H', $prayertimes->current_time); ?>">
+                      <input type="hidden" id="current_minute" value="<?php echo date('i', $prayertimes->current_time); ?>">
                       <span class="date"><?php echo ucfirst(strftime("%A")) . ' ' . date('d', $prayertimes->current_time) . ' ' . $prayertimes->get_months(date('m', $prayertimes->current_time))['fr']; ?>  <span class="arabic_text"> <?php echo '('.$prayertimes->get_months(date('m', $prayertimes->current_time))['ar'].') '; ?></span><?php echo date('Y', $prayertimes->current_time); ?></span><br>
                       <span class="date"><?php echo $prayertimes->current_hijr_date; ?></span>
                   </div>
@@ -29,7 +31,7 @@ require_once 'Date.php';
                       <span class="arabic_text"><?php echo $prayertimes->get_masjid_name(); ?></span><br>
                       <!-- <div class="time_now_text"><span>Iqama temps de prière  <?php echo ucfirst($current_prayer_name); ?></span></div> -->
                       <div class="time_now_text"><span>Date et l'heure actuelle</span></div>
-                      <span class="date"><?php echo date('d', $prayertimes->time) . ' ' . $prayertimes->get_months(date('m', $prayertimes->time))['fr']; ?>  <span class="arabic_text"> <?php echo '('.$prayertimes->get_months(date('m', $prayertimes->time))['ar'].'), '; ?></span><?php echo date('Y', $prayertimes->time); ?></span><br>
+                      <span class="date"><?php echo date('d', $prayertimes->current_time) . ' ' . $prayertimes->get_months(date('m', $prayertimes->current_time))['fr']; ?>  <span class="arabic_text"> <?php echo '('.$prayertimes->get_months(date('m', $prayertimes->current_time))['ar'].'), '; ?></span><?php echo date('Y', $prayertimes->current_time); ?></span><br>
                           <span class="date"><?php echo $prayertimes->current_hijr_date; ?></span>
                       </div>
                   </div>
@@ -101,7 +103,15 @@ require_once 'Date.php';
         
 </table>
 
-<script>
+<script type="text/javascript">
+    // var flip_card = document.getElementsByClassName('flip-card');
+    // var i;
+
+    // for (i = 0; i < flip_card.length; i++) {
+    //     flip_card[i].addEventListener('click', function() {
+    //         this.classList.toggle('flip');
+    //     });
+    // }
    // add active class to current prayer
     var current_prayer_time = '<?php echo $prayertimes->next_prayer['time']; ?>';
     var current_prayer_iqamah = '<?php echo $prayertimes->next_prayer['iqamah']; ?>';
@@ -130,20 +140,14 @@ require_once 'Date.php';
         }
     }
 
-    // var bottom_label_time = $('.bottom_label_time').val();
-    // // doc ready
-    // $(document).ready(function(){
-    //     // loop through each bottom_label_time class
-    //     bottom_label_time.each(function(){
-    //         // get value of each bottom_label_time class
-    //         var bottom_label_time_value = $(this).text();
-    //         // if current prayer time is equal to bottom_label_time value
-    //         if(current_prayer_name == bottom_label_time_value){
-    //             // add class active
-    //             $(this).addClass('bottom_label_time_active');
-    //         }
-    //     });
-    // });
+  
+    // Refresh page every 30 seconds
+    setInterval(function(){
+        // refresh page
+        window.location.reload();
+    }, 30000);
+
+
 
    
    
