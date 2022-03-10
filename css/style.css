@@ -52,7 +52,7 @@ td {
 }
 
 .bottom_label_time_active {
-    background-color: #4B686E;
+    background-color: #4b686e;
 }
 
 .prayer_time_now_right,
@@ -63,7 +63,7 @@ td {
 }
 
 .prayer_time_now tr {
-    background: #4B686E;
+    background: #4b686e;
     border: solid 1px #1c2729;
 }
 
@@ -107,14 +107,36 @@ td {
 }
 
 .flip-card-back {
-    background-color: #4B686E;
+    background-color: #4b686e;
     transform: rotateY(180deg);
 }
 
 td.flip-card-outer:hover {
-    background: #4B686E;
+    background: #4b686e;
 }
 
 td.flip-card-outer {
     height: 400px;
+}
+
+.blinking {
+    animation: blinkingText 1.2s infinite;
+}
+
+@keyframes blinkingText {
+    0% {
+        color: #d7d4f1;
+    }
+    49% {
+        color: #d7d4f1;
+    }
+    60% {
+        color: transparent;
+    }
+    99% {
+        color: transparent;
+    }
+    100% {
+        color: #d7d4f1;
+    }
 }
