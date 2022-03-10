@@ -20,7 +20,7 @@ require_once 'Date.php';
      <td class="flip-card-outer" colspan="4">
           <div class="flip-card">
               <div class="flip-card-inner">
-                  <div class="flip-card-front" id="flip-card-front-top-left">
+                  <div class="flip-card-front">
                       <span class="arabic_text"><?php echo $prayertimes->get_masjid_name(); ?></span><br>
                       <div id="time_now_live" class="time_now"><span><?php echo date('h:i', $prayertimes->current_time) . ' ' ?></span><?php echo date('A', $prayertimes->current_time); ?></div>
                       <input type="hidden" id="current_hour" value="<?php echo date('H', $prayertimes->current_time); ?>">
@@ -144,9 +144,18 @@ require_once 'Date.php';
 
 
 function refresh(){
-var refresh=1000; // Refresh rate in milli seconds
-mytime=setTimeout('dispaly_live_time()',refresh)
+var refresh=1000; //
+time=setTimeout('dispaly_live_time()',refresh)
 }
+
+// checkTime function
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
 
 function dispaly_live_time() {
 
@@ -160,6 +169,11 @@ var x1 = x.toLocaleString();
 var hours = x.getHours();
 var minutes = x.getMinutes();
 var seconds = x.getSeconds();
+
+// add a zero in front of numbers<10
+minutes = checkTime(minutes);
+seconds = checkTime(seconds);
+
 
 // set AM or PM
 var ampm = hours >= 12 ? 'PM' : 'AM';
